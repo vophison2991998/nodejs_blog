@@ -1,0 +1,23 @@
+{
+    "name": "blog",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": " nodemon --inspect index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vophison2991998/nodejs_blog.git"
+    },
+    "author": "nodejs",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vophison2991998/nodejs_blog/issues"
+    },
+    "homepage": "https://github.com/vophison2991998/nodejs_blog#readme",
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    }
+}
