@@ -11,15 +11,21 @@ class coursecontroller {
     }
 
     create(req, res, next) {
-        res.render('Courses/create');
+        res.render('courses/create');
     }
+    async store(req, res, next) {
 
-    store(req, res, next) {
-
-        const course = new course(req.body);
-        course.save();
-    }
-
-
+            const formData = req.body;
+            formData.image = `https://files.fullstack.edu.vn/${req.body.videoId}/courses/6.png`;
+            const course = new Course(formData);
+          
+            try {
+                await Course.create(formData);
+            } catch (error) {
+                console.log(error);
+            }
+            res.send('created');
+        }
+  
 }
 module.exports = new coursecontroller();
