@@ -29,11 +29,14 @@
         "ejs": "^3.1.6",
         "engine": "^1.0.0",
         "express-handlebars": "^6.0.3",
+        "generator": "^1.0.1",
         "handlebars": "^4.7.7",
         "husky": "^7.0.4",
         "lint-staged": "^12.3.7",
-        "mongoose": "^6.2.10",
+        "mongoose": "^6.3.2",
+        "mongoose-slug-generator": "^1.0.4",
         "prettier": "^2.6.2",
-        "query": "^0.2.0"
+        "query": "^0.2.0",
+        "slug": "^5.3.0"
     }
 }

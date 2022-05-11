@@ -1,0 +1,24 @@
+<div class="mt-4">
+    <h3>Khóa Học Của Tôi</h3>
+    <table class="table mt-4">
+        <thead>
+        <th scope="col">STT</th>
+        <th scope="col">tên khóa học</th>
+        <th scope="col"> trình độ</th>
+        <th scope="col">Thời gian tạo</th>
+        
+        </thead>
+        <tbody>
+            {{#each Course}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.level}}</td>         
+                <td>{{this.createdAt}}</td>
+
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
