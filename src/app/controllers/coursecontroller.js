@@ -13,6 +13,7 @@ class coursecontroller {
     create(req, res, next) {
         res.render('courses/create');
     }
+
     store(req, res, next) {
 
         const formData = req.body;
@@ -23,6 +24,24 @@ class coursecontroller {
             .catch(error => {
 
             });
+
+
+    }
+
+
+    store(req, res, next) {
+
+        const formData = req.body;
+        formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
+        const course = new Course(formData);
+        course.save()
+            .then(() => res.redirect('/'))
+            .catch(error => {
+
+
+            })
+
+
 
 
     }
