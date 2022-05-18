@@ -1,6 +1,8 @@
 const path = require('path');
 
 const express = require('express');
+const methodOverride = require('method-override');
+
 
 const morgan = require('morgan');
 
@@ -28,6 +30,8 @@ app.use(
     }),
 );
 app.use(express.json());
+app.use(methodOverride('_method'));
+
 
 
 app.engine('hbs', handlebars.engine({
