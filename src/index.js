@@ -9,10 +9,7 @@ const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 
 const db = require('./Config/db')
-
-
-
-
+    // ket noi mongodb
 db.connect();
 
 
@@ -40,13 +37,13 @@ app.engine('hbs', handlebars.engine({
     helpers: {
         sum: (a, b) => a + b,
     }
-
-
 }));
 
 app.set('view engine', 'hbs');
 
 app.set('views', path.join(__dirname, 'resources', 'views'));
+
+
 
 route(app);
 

@@ -76,8 +76,13 @@ class coursecontroller {
         Course.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
-
     }
+
+    handleFormAcitons(req, res, next) {
+        res.json(req.body);
+    }
+
+
 
 }
 module.exports = new coursecontroller();
