@@ -10,6 +10,18 @@ class coursecontroller {
             .catch(next);
     }
 
+    searchs(req, res, next) {
+
+        Course.findOne({})
+        Course.findById({ _id: req.params.id })
+            .then(Course => res.render('courses/search', {
+                Course: mongooseToObject(Course)
+            }))
+            .catch(next);
+    }
+
+
+
     create(req, res, next) {
         res.render('courses/create');
     }
@@ -21,9 +33,7 @@ class coursecontroller {
         const course = new Course(formData);
         course.save()
             .then(() => res.redirect('/'))
-            .catch(error => {
-
-            });
+            .catch(next);
 
 
     }
@@ -31,20 +41,22 @@ class coursecontroller {
 
     store(req, res, next) {
 
-        const formData = req.body;
-        formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
-        const course = new Course(formData);
-        course.save()
+        req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+        const course = new Course(req.body);
+        course
+            .save()
             .then(() => res.redirect('/me/stored/courses'))
-            .catch(error => {})
+            .catch(next);
+
 
     }
 
     edit(req, res, next) {
         Course.findById(req.params.id)
-            .then(Course => res.render('courses/edit', {
-                Course: mongooseToObject(Course)
-            }))
+            .then(Course =>
+                res.render('courses/edit', {
+                    Course: mongooseToObject(Course)
+                }), )
             .catch(next);
     }
     update(req, res, next) {
@@ -59,15 +71,17 @@ class coursecontroller {
                 .then(() => res.redirect('back'))
                 .catch(next);
 
-        }
-        /// xóa vinh viễn
+        } // xoa con du lieu -
+
+
+    /// xóa vinh viễn ++
     forceDestroy(req, res, next) {
-        Course.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
-            .catch(next);
+            Course.deleteOne({ _id: req.params.id })
+                .then(() => res.redirect('back'))
+                .catch(next);
 
-    }
-
+        }
+        // xoa binh vien --
 
 
 
@@ -79,9 +93,18 @@ class coursecontroller {
     }
 
     handleFormAcitons(req, res, next) {
-        res.json(req.body);
-    }
+        switch (req.body.action) {
+            case 'delete':
+                Course.delete({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
 
+                break;
+            default:
+                res.json({ message: 'Action is invalide!' });
+        }
+
+    }
 
 
 }

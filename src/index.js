@@ -8,6 +8,10 @@ const morgan = require('morgan');
 
 const handlebars = require('express-handlebars');
 
+const sortMiddleware = require('./app/middlewares/sortMiddleware');
+
+
+
 const db = require('./Config/db')
     // ket noi mongodb
 db.connect();
@@ -29,16 +33,18 @@ app.use(
 app.use(express.json());
 app.use(methodOverride('_method'));
 
+// custom sortMiddleware
+app.use(sortMiddleware);
+
 
 
 app.engine('hbs', handlebars.engine({
     extname: '.hbs',
+    // icon +
+    helpers: require('./helpers/handlebars')
 
-    helpers: {
-        sum: (a, b) => a + b,
-    }
 }));
-
+// icon -
 app.set('view engine', 'hbs');
 
 app.set('views', path.join(__dirname, 'resources', 'views'));
